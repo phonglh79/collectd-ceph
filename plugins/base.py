@@ -130,3 +130,6 @@ class Base(object):
         if self.debug:
             collectd.info("%s: %s" % (self.prefix, msg))
 
+    @staticmethod
+    def reset_sigchld():
+        signal.signal(signal.SIGCHLD, signal.SIG_DFL)
