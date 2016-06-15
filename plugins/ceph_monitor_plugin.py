@@ -31,6 +31,7 @@
 
 import collectd
 import json
+import shlex
 import traceback
 import subprocess
 
@@ -47,20 +48,32 @@ class CephMonPlugin(base.Base):
 
         ceph_cluster = "%s-%s" % (self.prefix, self.cluster)
 
-        data = { ceph_cluster: { 'mon': { 'number': 0, 'quorum': 0 } } }
-        output = None
+        data = {
+            ceph_cluster : {
+                'mon': {
+                    'number': 0,
+                    'quorum': 0
+                }
+            }
+        }
         try:
-            cephmoncmdline='ceph mon dump --format json --cluster ' + self.cluster
-            output = subprocess.check_output(cephmoncmdline, shell=True)
+            ceph_command = 'ceph mon dump --format json --cluster %s' % self.cluster
+            ceph_split = shlex.split(ceph_command)
+            subproc = subprocess.Popen(ceph_split, stdout=subprocess.PIPE,
+                                       stderr=subprocess.PIPE)
+            stdout, stderr = subproc.communicate()
         except Exception as exc:
             collectd.error("ceph-mon: failed to ceph mon dump :: %s :: %s"
                     % (exc, traceback.format_exc()))
             return
 
-        if output is None:
+        if 'dumped monmap epoch' not in stderr:
+            collectd.error('ceph-mon: failed to ceph mon dump :: output was %s' % stdout)
+
+        if stdout is None:
             collectd.error('ceph-mon: failed to ceph mon dump :: output was None')
 
-        json_data = json.loads(output)
+        json_data = json.loads(stdout)
 
         data[ceph_cluster]['mon']['number'] = len(json_data['mons'])
         data[ceph_cluster]['mon']['quorum'] = len(json_data['quorum'])
