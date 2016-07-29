@@ -87,7 +87,7 @@ class CephOsdPlugin(base.Base):
                 osd_data['in'] += 1
             else:
                 osd_data['out'] += 1
-    
+
         return data
 
 try:
@@ -99,11 +99,11 @@ except Exception as exc:
 def configure_callback(conf):
     """Received configuration information"""
     plugin.config_callback(conf)
+    collectd.register_read(read_callback, plugin.interval)
 
 def read_callback():
     """Callback triggerred by collectd on read"""
     plugin.read_callback()
 
 collectd.register_config(configure_callback)
-collectd.register_read(read_callback, plugin.interval)
-
+# collectd.register_read(read_callback, plugin.interval)
