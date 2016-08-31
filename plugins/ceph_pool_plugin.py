@@ -32,7 +32,6 @@
 import collectd
 import json
 import traceback
-import subprocess
 
 import base
 
@@ -49,22 +48,10 @@ class CephPoolPlugin(base.Base):
 
         data = { ceph_cluster: {} }
 
-        stats_output = None
-        try:
-            osd_pool_cmdline='ceph osd pool stats -f json --cluster ' + self.cluster
-            stats_output = subprocess.check_output(osd_pool_cmdline, shell=True)
-            cephdf_cmdline='ceph df -f json --cluster ' + self.cluster 
-            df_output = subprocess.check_output(cephdf_cmdline, shell=True)
-        except Exception as exc:
-            collectd.error("ceph-pool: failed to ceph pool stats :: %s :: %s"
-                    % (exc, traceback.format_exc()))
+        stats_output = self.exec_cmd('osd pool stats')
+        df_output = self.exec_cmd('df')
+        if stats_output is None or df_output is None:
             return
-
-        if stats_output is None:
-            collectd.error('ceph-pool: failed to ceph osd pool stats :: output was None')
-
-        if df_output is None:
-            collectd.error('ceph-pool: failed to ceph df :: output was None')
 
         json_stats_data = json.loads(stats_output)
         json_df_data = json.loads(df_output)

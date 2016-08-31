@@ -30,7 +30,6 @@
 import collectd
 import json
 import traceback
-import subprocess
 
 import base
 
@@ -46,17 +45,9 @@ class CephPGPlugin(base.Base):
         ceph_cluster = "%s-%s" % (self.prefix, self.cluster)
 
         data = { ceph_cluster: { 'pg': { } }  }
-        output = None
-        try:
-            cephpg_cmdline='ceph pg dump --format json --cluster '+ self.cluster
-            output = subprocess.check_output(cephpg_cmdline, shell=True)
-        except Exception as exc:
-            collectd.error("ceph-pg: failed to ceph pg dump :: %s :: %s"
-                    % (exc, traceback.format_exc()))
-            return
-
+        output = self.exec_cmd('pg dump')
         if output is None:
-            collectd.error('ceph-pg: failed to ceph osd dump :: output was None')
+            return
 
         json_data = json.loads(output)
 
