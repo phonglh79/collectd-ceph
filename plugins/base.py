@@ -50,14 +50,37 @@ class Base(object):
             self.cluster_handle = rados.Rados(conffile='/etc/ceph/ceph.conf')
             self.cluster_handle.connect()
 
+    def ensure_rados_connected(self):
+        if rados is None:
+            return False
+
+        if self.cluster_handle is None or self.cluster_handle.state != 'connected':
+            self.cluster_handle = rados.Rados(conffile='/etc/ceph/ceph.conf')
+            self.cluster_handle.connect()
+
+        return self.cluster_handle.state == 'connected'
+
     def exec_cmd(self, cmd):
+        if self.ensure_rados_connected():
+            try:
+                ret = self.cluster_handle.mon_command('{"prefix":"'+cmd+'","format":"json"}', "")
+                if ret[0] != 0:
+                    collectd.error("ceph-osd: failed to ceph " + cmd + " :: exit code %i" % ret[0])
+                    return None
+
+                return ret[1]
+            except Exception as exc:
+                collectd.error("ceph-osd: failed to ceph " + cmd + " :: %s :: %s"
+                   % (exc, traceback.format_exc()))
+                return None
+
         try:
             cephosdcmdline='ceph ' + cmd + ' --format json --cluster ' + self.cluster
             output = subprocess.check_output(cephosdcmdline, shell=True)
         except Exception as exc:
             collectd.error("ceph-osd: failed to ceph " + cmd + " :: %s :: %s"
                    % (exc, traceback.format_exc()))
-            return
+            return None
 
         if output is None:
             collectd.error('ceph-osd: failed to ceph ' + cmd + ' :: output was None')
