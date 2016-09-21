@@ -28,6 +28,7 @@
 #
 
 import collectd
+import signal
 import datetime
 import traceback
 
