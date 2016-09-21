@@ -81,6 +81,6 @@ def read_callback():
     """Callback triggerred by collectd on read"""
     plugin.read_callback()
 
-collectd.register_init(CephLatencyPlugin.reset_sigchld)
+collectd.register_init(CephMonPlugin.reset_sigchld)
 collectd.register_config(configure_callback)
 collectd.register_read(read_callback, plugin.interval)
