@@ -87,7 +87,7 @@ class CephOsdPlugin(base.Base):
                 osd_data['in'] += 1
             else:
                 osd_data['out'] += 1
-    
+
         return data
 
 try:
@@ -106,4 +106,3 @@ def read_callback():
     plugin.read_callback()
 
 collectd.register_config(configure_callback)
-
