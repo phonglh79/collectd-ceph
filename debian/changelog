@@ -1,3 +1,9 @@
+collectd-ceph (0.5.0-1ubuntu1) precise; urgency=medium
+
+  * Merge pull request for Giant support
+
+ -- Xav Paice <xav@catalyst.net.nz>  Tue, 09 Dec 2014 15:51:23 +1300
+
 collectd-ceph (0.4.0-1ubuntu1) precise; urgency=low
 
   * Added osd latency metrics and usage

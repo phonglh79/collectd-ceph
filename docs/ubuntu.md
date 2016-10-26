@@ -11,18 +11,19 @@ pbuilder-dist precise create
 
 and for every release (from master):
 ```
+RELEASE=0.2.0
 rm -rf /tmp/build-collectd
 mkdir /tmp/build-collectd
 cd /tmp/build-collectd
-wget https://github.com/rochaporto/collectd-ceph/archive/master.zip
+wget https://github.com/catalyst/collectd-ceph/archive/master.zip
 unzip master.zip
-tar zcvf collectd-ceph-0.2.0.tar.gz collectd-ceph-master/
-bzr dh-make collectd-ceph 0.2.0 collectd-ceph-0.2.0.tar.gz
+tar zcvf collectd-ceph-${RELEASE}.tar.gz collectd-ceph-master/
+bzr dh-make collectd-ceph ${RELEASE} collectd-ceph-${RELEASE}.tar.gz
 cd collectd-ceph
 bzr builddeb -S
 cd ../build-area
-pbuilder-dist precise build collectd-ceph_0.2.0-1ubuntu1.dsc
-dput ppa:rocha-porto/collectd ../collectd-ceph_0.2.0-1ubuntu1_source.changes
+pbuilder-dist precise build collectd-ceph_${RELEASE}-1ubuntu1.dsc
+dput ppa:rocha-porto/collectd ../collectd-ceph_${RELEASE}-1ubuntu1_source.changes
 ```
 
 ## Rebuilding a newer collectd version for precise
