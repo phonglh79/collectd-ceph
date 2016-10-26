@@ -50,8 +50,8 @@ class CephPoolPlugin(base.Base):
 
         stats_output = None
         try:
-            stats_output = self.exec_cmd('osd pool stats --cluster ' + self.cluster)
-            df_output = self.exec_cmd('df --cluster ' + self.cluster)
+            stats_output = self.exec_cmd('osd pool stats')
+            df_output = self.exec_cmd('df')
         except Exception as exc:
             collectd.error("ceph-pool: failed to ceph pool stats :: %s :: %s"
                     % (exc, traceback.format_exc()))
