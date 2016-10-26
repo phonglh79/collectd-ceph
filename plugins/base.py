@@ -44,11 +44,12 @@ class Base(object):
         self.debug = False
         self.prefix = ''
         self.cluster = 'ceph'
+        self.name = 'client.admin'
         self.testpool = 'test'
         self.interval = 60.0
         self.cluster_handle = None
         if rados is not None:
-            self.cluster_handle = rados.Rados(conffile='/etc/ceph/ceph.conf')
+            self.cluster_handle = rados.Rados(conffile='/etc/ceph/ceph.conf', name=self.name)
             self.cluster_handle.connect()
 
     def ensure_rados_connected(self):
@@ -56,7 +57,7 @@ class Base(object):
             return False
 
         if self.cluster_handle is None or self.cluster_handle.state != 'connected':
-            self.cluster_handle = rados.Rados(conffile='/etc/ceph/ceph.conf')
+            self.cluster_handle = rados.Rados(conffile='/etc/ceph/ceph.conf', name=self.name)
             self.cluster_handle.connect()
 
         return self.cluster_handle.state == 'connected'
