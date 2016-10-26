@@ -1,3 +1,15 @@
+This is a fork of rochaporto's version, which seems to have been abandoned 
+around 2015, with plenty of bugs and pull requests lying around. I have tried
+to incorporate most of the outstanding pulls and some of the interesting looking 
+but not overly conflicting forks.
+
+If __you__ have a clean pull request I will eventually try to merge in. I don't
+promise to fix issues but if anyone do I'll merge it.
+
+I don't really want to maintain this but I don't want to let it lying bug-ridden,
+I want to use it. 
+
+
 collectd-ceph
 ==================
 
