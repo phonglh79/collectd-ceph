@@ -32,7 +32,6 @@
 import collectd
 import json
 import traceback
-import subprocess
 
 import base
 
@@ -48,17 +47,9 @@ class CephMonPlugin(base.Base):
         ceph_cluster = "%s-%s" % (self.prefix, self.cluster)
 
         data = { ceph_cluster: { 'mon': { 'number': 0, 'quorum': 0 } } }
-        output = None
-        try:
-            cephmoncmdline='ceph mon dump --format json --cluster ' + self.cluster
-            output = subprocess.check_output(cephmoncmdline, shell=True)
-        except Exception as exc:
-            collectd.error("ceph-mon: failed to ceph mon dump :: %s :: %s"
-                    % (exc, traceback.format_exc()))
-            return
-
+        output = self.exec_cmd('mon dump')
         if output is None:
-            collectd.error('ceph-mon: failed to ceph mon dump :: output was None')
+            return
 
         json_data = json.loads(output)
 

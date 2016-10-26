@@ -32,8 +32,6 @@
 import collectd
 import json
 import traceback
-import subprocess
-
 import base
 
 class CephOsdPlugin(base.Base):
@@ -51,17 +49,9 @@ class CephOsdPlugin(base.Base):
             'pool': { 'number': 0 },
             'osd': { 'up': 0, 'in': 0, 'down': 0, 'out': 0} 
         } }
-        output = None
-        try:
-            cephosdcmdline='ceph osd dump --format json --cluster ' + self.cluster
-            output = subprocess.check_output(cephosdcmdline, shell=True)
-        except Exception as exc:
-            collectd.error("ceph-osd: failed to ceph osd dump :: %s :: %s"
-                    % (exc, traceback.format_exc()))
-            return
-
+        output = self.exec_cmd('osd dump')
         if output is None:
-            collectd.error('ceph-osd: failed to ceph osd dump :: output was None')
+            return
 
         json_data = json.loads(output)
 
