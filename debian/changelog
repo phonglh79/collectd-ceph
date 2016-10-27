@@ -1,3 +1,10 @@
+collectd-ceph (0.5.1-1) jessie; urgency=medium
+
+  * Fro the original non-active head and merge various 
+    3rd party fixes.
+    
+ -- Peter Gervai <grin@grin.hu>  Thu, Oct 27 2016 08:57:58 +0200
+    
 collectd-ceph (0.5.0-1ubuntu1) precise; urgency=medium
 
   * Merge pull request for Giant support
