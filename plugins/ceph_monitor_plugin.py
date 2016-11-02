@@ -52,7 +52,7 @@ class CephMonPlugin(base.Base):
         if output is None:
             return
 
-        json_data = json.loads(stdout)
+        json_data = json.loads(output)
 
         data[ceph_cluster]['mon']['number'] = len(json_data['mons'])
         data[ceph_cluster]['mon']['quorum'] = len(json_data['quorum'])
