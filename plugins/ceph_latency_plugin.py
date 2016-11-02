@@ -30,6 +30,7 @@
 #
 
 import collectd
+import re
 import traceback
 import subprocess
 
@@ -46,12 +47,14 @@ class CephLatencyPlugin(base.Base):
 
         ceph_cluster = "%s-%s" % (self.prefix, self.cluster)
 
-        data = { ceph_cluster: {} }
+        data = {
+            ceph_cluster: {},
+        }
 
         output = None
         try:
-            output = subprocess.check_output(
-              "timeout 30s rados --cluster "+ self.cluster +" -p " + format(self.testpool) + " bench 10 write -t 1 -b 65536 2>/dev/null | grep -i latency | awk '{print 1000*$3}'", shell=True)
+            command = "timeout 30s rados --cluster %s -p %s bench 10 write -t 1 -b 65536" % (self.cluster, format(self.testpool))
+            output = subprocess.check_output(command, shell=True)
         except Exception as exc:
             collectd.error("ceph-latency: failed to run rados bench :: %s :: %s"
                     % (exc, traceback.format_exc()))
@@ -60,13 +63,23 @@ class CephLatencyPlugin(base.Base):
         if output is None:
             collectd.error('ceph-latency: failed to run rados bench :: output was None')
 
-        results = output.split('\n')
-        # push values
+        regex_match = re.compile('^([a-zA-Z]+) [lL]atency: \s* (\w+.?\w+)\s*', re.MULTILINE)
+        results = regex_match.findall(output)
+
+        if len(results) == 0:
+            collectd.error('ceph-latency: failed to run rados bench :: output unrecognized %s' % output)
+            return
+
         data[ceph_cluster]['cluster'] = {}
-        data[ceph_cluster]['cluster']['avg_latency'] = results[0]
-        data[ceph_cluster]['cluster']['stddev_latency'] = results[1]
-        data[ceph_cluster]['cluster']['max_latency'] = results[2]
-        data[ceph_cluster]['cluster']['min_latency'] = results[3]
+        for key, value in results:
+            if key == 'Average':
+                data[ceph_cluster]['cluster']['avg_latency'] = value
+            elif key == 'Stddev':
+                data[ceph_cluster]['cluster']['stddev_latency'] = value
+            elif key == 'Max':
+                data[ceph_cluster]['cluster']['max_latency'] = value
+            elif key == 'Min':
+                data[ceph_cluster]['cluster']['min_latency'] = value
 
         return data
 
