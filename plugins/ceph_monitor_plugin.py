@@ -31,7 +31,6 @@
 
 import collectd
 import json
-import shlex
 import traceback
 
 import base
