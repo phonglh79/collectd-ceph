@@ -73,13 +73,13 @@ class CephLatencyPlugin(base.Base):
         data[ceph_cluster]['cluster'] = {}
         for key, value in results:
             if key == 'Average':
-                data[ceph_cluster]['cluster']['avg_latency'] = value
+                data[ceph_cluster]['cluster']['avg_latency'] = value * 1000
             elif key == 'Stddev':
-                data[ceph_cluster]['cluster']['stddev_latency'] = value
+                data[ceph_cluster]['cluster']['stddev_latency'] = value * 1000
             elif key == 'Max':
-                data[ceph_cluster]['cluster']['max_latency'] = value
+                data[ceph_cluster]['cluster']['max_latency'] = value * 1000
             elif key == 'Min':
-                data[ceph_cluster]['cluster']['min_latency'] = value
+                data[ceph_cluster]['cluster']['min_latency'] = value * 1000
 
         return data
 
