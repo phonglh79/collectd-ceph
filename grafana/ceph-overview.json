@@ -767,7 +767,8 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "repeat": "pool",
+          "repeat": null,
+          "repeatIteration": 1478697883907,
           "resolution": 100,
           "scale": 1,
           "scopedVars": {
@@ -886,7 +887,8 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "repeat": "pool",
+          "repeat": null,
+          "repeatIteration": 1478697883907,
           "resolution": 100,
           "scale": 1,
           "scopedVars": {
@@ -954,7 +956,26 @@
             }
           ],
           "zerofill": true
-        },
+        }
+      ],
+      "repeat": "pool",
+      "scopedVars": {
+        "pool": {
+          "text": "pool-cache_pool_00",
+          "value": "pool-cache_pool_00",
+          "selected": false
+        }
+      },
+      "showTitle": true,
+      "title": "$pool throughput"
+    },
+    {
+      "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "250px",
+      "notice": false,
+      "panels": [
         {
           "aliasColors": {
             "Read datarate": "#70DBED",
@@ -1006,6 +1027,7 @@
           "points": false,
           "renderer": "flot",
           "repeat": null,
+          "repeatIteration": 1478697883907,
           "resolution": 100,
           "scale": 1,
           "scopedVars": {
@@ -1072,9 +1094,7 @@
               "show": true
             }
           ],
-          "zerofill": true,
-          "repeatIteration": 1478529756325,
-          "repeatPanelId": 15
+          "zerofill": true
         },
         {
           "aliasColors": {
@@ -1127,127 +1147,7 @@
           "points": false,
           "renderer": "flot",
           "repeat": null,
-          "resolution": 100,
-          "scale": 1,
-          "scopedVars": {
-            "pool": {
-              "text": "pool-data_pool_01",
-              "value": "pool-data_pool_01",
-              "selected": false
-            }
-          },
-          "seriesOverrides": [
-            {
-              "alias": "datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-cache_pool_00 datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-data_pool_00 datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-data_pool_01 datarate",
-              "yaxis": 2
-            }
-          ],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "refId": "D",
-              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_op_per_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 iops')",
-              "textEditor": false
-            },
-            {
-              "refId": "A",
-              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_bytes_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 datarate')",
-              "textEditor": false
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$pool Write Throughput",
-          "tooltip": {
-            "msResolution": false,
-            "query_as_alias": true,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "iops",
-              "show": true
-            },
-            {
-              "format": "Bps",
-              "show": true
-            }
-          ],
-          "zerofill": true,
-          "repeatIteration": 1478529756325,
-          "repeatPanelId": 15
-        },
-        {
-          "aliasColors": {
-            "Read datarate": "#70DBED",
-            "Read iops": "#052B51",
-            "Write datarate": "#E0752D",
-            "Write iops": "#890F02",
-            "datarate": "#C15C17",
-            "iops": "#BF1B00",
-            "pool-cache_pool_00 datarate": "#3F6833",
-            "pool-cache_pool_00 iops": "#7EB26D",
-            "pool-data_pool_00 datarate": "#0A437C",
-            "pool-data_pool_00 iops": "#6ED0E0",
-            "pool-data_pool_01 datarate": "#890F02",
-            "pool-data_pool_01 iops": "#BF1B00"
-          },
-          "annotate": {
-            "enable": false
-          },
-          "bars": false,
-          "datasource": null,
-          "editable": true,
-          "fill": 0,
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 19,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "loadingEditor": false,
-          "minSpan": 6,
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
+          "repeatIteration": 1478697883907,
           "resolution": 100,
           "scale": 1,
           "scopedVars": {
@@ -1314,9 +1214,148 @@
               "show": true
             }
           ],
-          "zerofill": true,
-          "repeatIteration": 1478529756325,
-          "repeatPanelId": 16
+          "zerofill": true
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": 1478697883907,
+      "repeatRowId": 2,
+      "scopedVars": {
+        "pool": {
+          "text": "pool-data_pool_00",
+          "value": "pool-data_pool_00",
+          "selected": false
+        }
+      },
+      "showTitle": true,
+      "title": "$pool overview"
+    },
+    {
+      "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "250px",
+      "notice": false,
+      "panels": [
+        {
+          "aliasColors": {
+            "Read datarate": "#70DBED",
+            "Read iops": "#052B51",
+            "Write datarate": "#E0752D",
+            "Write iops": "#890F02",
+            "datarate": "#C15C17",
+            "iops": "#BF1B00",
+            "pool-cache_pool_00 datarate": "#3F6833",
+            "pool-cache_pool_00 iops": "#7EB26D",
+            "pool-data_pool_00 datarate": "#0A437C",
+            "pool-data_pool_00 iops": "#6ED0E0",
+            "pool-data_pool_01 datarate": "#890F02",
+            "pool-data_pool_01 iops": "#BF1B00"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 19,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "loadingEditor": false,
+          "minSpan": 6,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeat": null,
+          "repeatIteration": 1478697883907,
+          "resolution": 100,
+          "scale": 1,
+          "scopedVars": {
+            "pool": {
+              "text": "pool-data_pool_01",
+              "value": "pool-data_pool_01",
+              "selected": false
+            }
+          },
+          "seriesOverrides": [
+            {
+              "alias": "datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-cache_pool_00 datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-data_pool_00 datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-data_pool_01 datarate",
+              "yaxis": 2
+            }
+          ],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "D",
+              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_op_per_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 iops')",
+              "textEditor": false
+            },
+            {
+              "refId": "A",
+              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_bytes_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 datarate')",
+              "textEditor": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "$pool Write Throughput",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "iops",
+              "show": true
+            },
+            {
+              "format": "Bps",
+              "show": true
+            }
+          ],
+          "zerofill": true
         },
         {
           "aliasColors": {
@@ -1369,6 +1408,7 @@
           "points": false,
           "renderer": "flot",
           "repeat": null,
+          "repeatIteration": 1478697883907,
           "resolution": 100,
           "scale": 1,
           "scopedVars": {
@@ -1435,13 +1475,21 @@
               "show": true
             }
           ],
-          "zerofill": true,
-          "repeatIteration": 1478529756325,
-          "repeatPanelId": 16
+          "zerofill": true
         }
       ],
+      "repeat": null,
+      "repeatIteration": 1478697883907,
+      "repeatRowId": 2,
+      "scopedVars": {
+        "pool": {
+          "text": "pool-data_pool_01",
+          "value": "pool-data_pool_01",
+          "selected": false
+        }
+      },
       "showTitle": true,
-      "title": "by pool overview"
+      "title": "$pool overview"
     },
     {
       "collapsable": true,
@@ -1855,7 +1903,7 @@
   },
   "refresh": false,
   "schemaVersion": 12,
-  "version": 14,
+  "version": 19,
   "links": [],
   "gnetId": null
 }
