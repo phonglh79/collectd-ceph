@@ -1,979 +1,1861 @@
 {
+  "id": 3,
   "title": "Ceph Overview",
-  "services": {
-    "filter": {
-      "list": [
-        {
-          "type": "filter",
-          "name": "cluster",
-          "query": "collectd.*.ceph-*",
-          "includeAll": true,
-          "options": [
-            {
-              "text": "All",
-              "value": "*"
-            },
-            {
-              "text": "ceph-ceph",
-              "value": "ceph-ceph"
-            }
-          ],
-          "current": {
-            "text": "All",
-            "value": "*"
-          }
-        },
-        {
-          "type": "filter",
-          "name": "pool",
-          "query": "collectd.*.*.pool-*",
-          "includeAll": true,
-          "options": [
-            {
-              "text": "All",
-              "value": "*"
-            },
-            {
-              "text": "pool-_intent-log",
-              "value": "pool-_intent-log"
-            },
-            {
-              "text": "pool-_log",
-              "value": "pool-_log"
-            },
-            {
-              "text": "pool-_rgw",
-              "value": "pool-_rgw"
-            },
-            {
-              "text": "pool-_rgw_control",
-              "value": "pool-_rgw_control"
-            },
-            {
-              "text": "pool-_rgw_gc",
-              "value": "pool-_rgw_gc"
-            },
-            {
-              "text": "pool-_rgw_root",
-              "value": "pool-_rgw_root"
-            },
-            {
-              "text": "pool-_usage",
-              "value": "pool-_usage"
-            },
-            {
-              "text": "pool-_users",
-              "value": "pool-_users"
-            },
-            {
-              "text": "pool-_users_email",
-              "value": "pool-_users_email"
-            },
-            {
-              "text": "pool-_users_swift",
-              "value": "pool-_users_swift"
-            },
-            {
-              "text": "pool-_users_uid",
-              "value": "pool-_users_uid"
-            },
-            {
-              "text": "pool-data",
-              "value": "pool-data"
-            },
-            {
-              "text": "pool-images",
-              "value": "pool-images"
-            },
-            {
-              "text": "pool-metadata",
-              "value": "pool-metadata"
-            },
-            {
-              "text": "pool-rbd",
-              "value": "pool-rbd"
-            },
-            {
-              "text": "pool-volumes",
-              "value": "pool-volumes"
-            }
-          ],
-          "current": {
-            "text": "All",
-            "value": "*"
-          }
-        }
-      ],
-      "time": {
-        "from": "now-1h",
-        "to": "now"
-      }
-    }
-  },
+  "tags": [
+    "storage",
+    "ceph",
+    "overview"
+  ],
+  "style": "dark",
+  "timezone": "browser",
+  "editable": true,
+  "hideControls": false,
+  "sharedCrosshair": false,
   "rows": [
     {
-      "title": "Row1",
-      "height": "300px",
-      "editable": true,
-      "collapse": false,
       "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "300px",
+      "notice": false,
       "panels": [
         {
-          "span": 6,
-          "editable": true,
-          "type": "graphite",
-          "loadingEditor": false,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_formats": [
-            "bytes",
-            "none"
-          ],
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          "aliasColors": {
+            "Pool Available": "#7EB26D",
+            "Pool Used": "#6ED0E0",
+            "Raw Available": "#3F6833",
+            "Raw Total": "#BF1B00",
+            "Raw Used": "#0A50A1"
           },
           "annotate": {
             "enable": false
           },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
           "bars": false,
-          "stack": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "height": "325px",
+          "id": 1,
           "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
+            "avg": false,
+            "current": false,
             "max": false,
-            "current": true,
+            "min": false,
+            "show": true,
             "total": false,
-            "avg": false
+            "values": false
           },
-          "percentage": false,
-          "zerofill": true,
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "loadingEditor": false,
           "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
           "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true
-          },
           "targets": [
             {
-              "target": "alias(sumSeries(collectd.*.[[cluster]].[[pool]].gauge.bytes_used),'Pool Used')",
-              "hide": false
+              "hide": false,
+              "refId": "A",
+              "target": "alias(sumSeries(collectd.*.[[cluster]].[[pool]].gauge.bytes_used),'Pool Used')"
             },
             {
+              "hide": false,
+              "refId": "B",
               "target": "alias(divideSeries(sumSeries(collectd.*.[[cluster]].cluster.gauge.total_avail), averageSeries(collectd.*.[[cluster]].[[pool]].gauge.size)), 'Pool Available')",
-              "hide": false
+              "textEditor": true
             },
             {
-              "target": "alias(collectd.*.[[cluster]].cluster.gauge.total_avail,'Raw Available')",
-              "hide": false
+              "hide": false,
+              "refId": "C",
+              "target": "alias(collectd.*.[[cluster]].cluster.gauge.total_avail,'Raw Available')"
             },
             {
+              "refId": "D",
               "target": "alias(collectd.*.[[cluster]].cluster.gauge.total_used,'Raw Used')"
             },
             {
-              "target": "alias(collectd.*.[[cluster]].cluster.gauge.total_space,'Raw Total')",
-              "hide": false
+              "hide": false,
+              "refId": "E",
+              "target": "alias(collectd.*.[[cluster]].cluster.gauge.total_space,'Raw Total')"
             }
           ],
-          "aliasColors": {
-            "Raw Total": "#BF1B00",
-            "Raw Available": "#3F6833",
-            "Pool Used": "#6ED0E0",
-            "Pool Available": "#7EB26D",
-            "Raw Used": "#0A50A1"
-          },
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Storage",
-          "aliasYAxis": {}
-        },
-        {
-          "span": 6,
-          "editable": true,
-          "type": "graphite",
-          "loadingEditor": false,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_formats": [
-            "bytes",
-            "short"
-          ],
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "annotate": {
-            "enable": false
-          },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false
-          },
-          "percentage": false,
-          "zerofill": true,
-          "nullPointMode": "connected",
-          "steppedLine": false,
           "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
           },
-          "targets": [
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
             {
-              "target": "alias(removeAbovePercentile(sumSeries(collectd.*.[[cluster]].[[pool]].gauge.read_bytes_sec),99),'Read')"
+              "format": "bytes",
+              "show": true
             },
             {
-              "target": "alias(removeAbovePercentile(sumSeries(collectd.*.[[cluster]].[[pool]].gauge.write_bytes_sec),99),'Write')"
+              "format": "none",
+              "show": true
             }
           ],
-          "aliasColors": {},
-          "aliasYAxis": {},
-          "title": "Throughput"
-        }
-      ],
-      "notice": false
-    },
-    {
-      "title": "",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
-      "collapsable": true,
-      "panels": [
-        {
-          "span": 6,
-          "editable": true,
-          "type": "graphite",
-          "loadingEditor": false,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_formats": [
-            "none",
-            "short"
-          ],
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "annotate": {
-            "enable": false
-          },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
-          "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
-            "max": false,
-            "current": true,
-            "total": false,
-            "avg": false
-          },
-          "percentage": false,
-          "zerofill": true,
-          "nullPointMode": "connected",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true
-          },
-          "targets": [
-            {
-              "target": "alias(removeAbovePercentile(sumSeries(collectd.*.[[cluster]].[[pool]].gauge.op_per_sec),99),'IOPS')"
-            }
-          ],
-          "aliasColors": {},
-          "aliasYAxis": {},
-          "title": "IOPS"
+          "zerofill": true
         },
         {
-          "span": 6,
-          "editable": true,
-          "type": "graphite",
-          "loadingEditor": false,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_formats": [
-            "ms",
-            "short"
-          ],
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          "aliasColors": {
+            "Avg": "#EF843C",
+            "Min": "#E5A8E2",
+            "Stddev": "#3F6833"
           },
           "annotate": {
             "enable": false
           },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
           "bars": false,
-          "stack": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "height": "325px",
+          "id": 4,
           "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
             "max": false,
-            "current": true,
+            "min": false,
+            "show": true,
             "total": false,
-            "avg": false
+            "values": false
           },
-          "percentage": false,
-          "zerofill": true,
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "loadingEditor": false,
           "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
           "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true
-          },
           "targets": [
             {
+              "refId": "A",
               "target": "alias(collectd.*.[[cluster]].cluster.gauge.avg_latency,'Avg')"
             },
             {
+              "hide": true,
+              "refId": "B",
               "target": "alias(collectd.*.[[cluster]].cluster.gauge.max_latency,'Max')"
             },
             {
+              "hide": true,
+              "refId": "C",
               "target": "alias(collectd.*.[[cluster]].cluster.gauge.min_latency,'Min')"
             },
             {
+              "hide": false,
+              "refId": "D",
               "target": "alias(collectd.*.[[cluster]].cluster.gauge.stddev_latency,'Stddev')"
             }
           ],
-          "aliasColors": {},
-          "aliasYAxis": {},
-          "title": "Cluster I/O Latency"
-        }
-      ],
-      "notice": false
-    },
-    {
-      "title": "",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
-      "collapsable": true,
-      "panels": [
-        {
-          "span": 4,
-          "editable": true,
-          "type": "graphite",
-          "loadingEditor": false,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_formats": [
-            "none",
-            "short"
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Cluster I/O Latency",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "ms",
+              "show": true
+            },
+            {
+              "format": "short",
+              "show": true
+            }
           ],
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          "zerofill": true
+        },
+        {
+          "aliasColors": {
+            "Read datarate": "#70DBED",
+            "Read iops": "#052B51",
+            "Write datarate": "#E0752D",
+            "Write iops": "#890F02",
+            "datarate": "#C15C17",
+            "iops": "#BF1B00"
           },
           "annotate": {
             "enable": false
           },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
           "bars": false,
-          "stack": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 12,
           "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
+            "avg": false,
+            "current": false,
             "max": false,
-            "current": true,
+            "min": false,
+            "show": true,
             "total": false,
-            "avg": false
+            "values": false
           },
-          "percentage": false,
-          "zerofill": true,
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "loadingEditor": false,
+          "minSpan": 6,
           "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [
+            {
+              "alias": "datarate",
+              "yaxis": 2
+            }
+          ],
+          "span": 6,
+          "stack": false,
           "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true
-          },
           "targets": [
             {
+              "refId": "D",
+              "target": "alias(removeAbovePercentile(sumSeries(collectd.*.[[cluster]].[[pool]].gauge.write_op_per_sec), 99), 'iops')",
+              "textEditor": false
+            },
+            {
+              "refId": "A",
+              "target": "alias(removeAbovePercentile(sumSeries(collectd.*.[[cluster]].[[pool]].gauge.write_bytes_sec), 99), 'datarate')",
+              "textEditor": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Write Throughput",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "iops",
+              "show": true
+            },
+            {
+              "format": "Bps",
+              "show": true
+            }
+          ],
+          "zerofill": true
+        },
+        {
+          "aliasColors": {
+            "Read datarate": "#70DBED",
+            "Read iops": "#052B51",
+            "Write datarate": "#E0752D",
+            "Write iops": "#890F02",
+            "datarate": "#C15C17",
+            "iops": "#BF1B00"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 13,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "loadingEditor": false,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [
+            {
+              "alias": "datarate",
+              "yaxis": 2
+            }
+          ],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "D",
+              "target": "alias(removeAbovePercentile(sumSeries(collectd.*.[[cluster]].[[pool]].gauge.read_op_per_sec), 99), 'iops')",
+              "textEditor": false
+            },
+            {
+              "refId": "A",
+              "target": "alias(removeAbovePercentile(sumSeries(collectd.*.[[cluster]].[[pool]].gauge.read_bytes_sec), 99), 'datarate')",
+              "textEditor": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Read Throughput",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "iops",
+              "show": true
+            },
+            {
+              "format": "Bps",
+              "show": true
+            }
+          ],
+          "zerofill": true
+        },
+        {
+          "aliasColors": {},
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 5,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "loadingEditor": false,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [],
+          "span": 4,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "A",
               "target": "alias(collectd.*.[[cluster]].mon.gauge.number,'Total')"
             },
             {
+              "refId": "B",
               "target": "alias(collectd.*.[[cluster]].mon.gauge.quorum,'Quorum')"
             }
           ],
-          "aliasColors": {},
-          "aliasYAxis": {},
-          "title": "Monitors"
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Monitors",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "none",
+              "show": true
+            },
+            {
+              "format": "short",
+              "show": true
+            }
+          ],
+          "zerofill": true
         },
         {
-          "span": 4,
-          "editable": true,
-          "type": "graphite",
-          "loadingEditor": false,
+          "aliasColors": {},
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
           "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_formats": [
-            "none",
-            "short"
-          ],
+          "editable": true,
+          "fill": 0,
           "grid": {
             "max": null,
             "min": 0,
             "threshold1": null,
-            "threshold2": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "annotate": {
-            "enable": false
-          },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
+          "id": 6,
           "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
+            "avg": false,
+            "current": false,
             "max": false,
-            "current": true,
+            "min": false,
+            "show": true,
             "total": false,
-            "avg": false
+            "values": false
           },
-          "percentage": false,
-          "zerofill": true,
+          "lines": true,
+          "linewidth": 2,
+          "loadingEditor": false,
           "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [],
+          "span": 4,
+          "stack": false,
           "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true
-          },
           "targets": [
             {
+              "refId": "A",
               "target": "alias(collectd.*.[[cluster]].osd.gauge.up,'Up')"
             },
             {
+              "refId": "B",
               "target": "alias(collectd.*.[[cluster]].osd.gauge.down,'Down')"
             },
             {
+              "refId": "C",
               "target": "alias(collectd.*.[[cluster]].osd.gauge.in,'In')"
             },
             {
+              "refId": "D",
               "target": "alias(collectd.*.[[cluster]].osd.gauge.out,'Out')"
             }
           ],
-          "aliasColors": {},
-          "aliasYAxis": {},
+          "timeFrom": null,
+          "timeShift": null,
           "title": "OSDs",
-          "leftYAxisLabel": "",
-          "rightYAxisLabel": ""
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "none",
+              "label": "",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": "",
+              "show": true
+            }
+          ],
+          "zerofill": true
         },
         {
-          "span": 4,
-          "editable": true,
-          "type": "graphite",
-          "loadingEditor": false,
+          "aliasColors": {},
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
           "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_formats": [
-            "none",
-            "short"
-          ],
+          "editable": true,
+          "fill": 0,
           "grid": {
             "max": null,
             "min": 0,
             "threshold1": null,
-            "threshold2": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "annotate": {
-            "enable": false
-          },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 2,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
+          "id": 7,
           "legend": {
-            "show": true,
-            "values": true,
-            "min": false,
+            "avg": false,
+            "current": false,
             "max": false,
-            "current": true,
+            "min": false,
+            "show": true,
             "total": false,
-            "avg": false
+            "values": false
           },
-          "percentage": false,
-          "zerofill": true,
+          "lines": true,
+          "linewidth": 2,
+          "loadingEditor": false,
           "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [],
+          "span": 4,
+          "stack": false,
           "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true
-          },
           "targets": [
             {
+              "refId": "A",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.creating,'Creating')"
             },
             {
+              "refId": "B",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.clean,'Clean')"
             },
             {
+              "refId": "C",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.active,'Active')"
             },
             {
+              "refId": "D",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.down,'Down')"
             },
             {
+              "refId": "E",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.replay,'Replay')"
             },
             {
+              "refId": "F",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.splitting,'Splitting')"
             },
             {
+              "refId": "G",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.scrubbing,'Scrubbing')"
             },
             {
+              "refId": "H",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.degraded,'Degraded')"
             },
             {
+              "refId": "I",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.inconsistent,'Inconsistent')"
             },
             {
+              "refId": "J",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.peering,'Peering')"
             },
             {
+              "refId": "K",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.repair,'Repair')"
             },
             {
+              "refId": "L",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.recovering,'Recovering')"
             },
             {
+              "refId": "M",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.backfill,'Backfill')"
             },
             {
+              "refId": "N",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.wait-backfill,'Wait Backfill')"
             },
             {
+              "refId": "O",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.backfill-toofull,'Backfill Toofull')"
             },
             {
+              "refId": "P",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.incomplete,'Incomplete')"
             },
             {
+              "refId": "Q",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.stale,'Stale')"
             },
             {
+              "refId": "R",
               "target": "alias(collectd.*.[[cluster]].pg.gauge.remapped,'Remapped')"
             }
           ],
-          "aliasColors": {},
-          "aliasYAxis": {},
-          "title": "Placement Groups"
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Placement Groups",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "none",
+              "show": true
+            },
+            {
+              "format": "short",
+              "show": true
+            }
+          ],
+          "zerofill": true
         }
       ],
-      "notice": false
+      "showTitle": true,
+      "title": "cluster overview"
     },
     {
-      "title": "",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
       "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "250px",
+      "notice": false,
       "panels": [
         {
-          "span": 6,
-          "editable": true,
-          "type": "graphite",
-          "loadingEditor": false,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_formats": [
-            "ms",
-            "short"
-          ],
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold2": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          "aliasColors": {
+            "Read datarate": "#70DBED",
+            "Read iops": "#052B51",
+            "Write datarate": "#E0752D",
+            "Write iops": "#890F02",
+            "datarate": "#C15C17",
+            "iops": "#BF1B00",
+            "pool-cache_pool_00 datarate": "#3F6833",
+            "pool-cache_pool_00 iops": "#7EB26D",
+            "pool-data_pool_00 datarate": "#0A437C",
+            "pool-data_pool_00 iops": "#6ED0E0",
+            "pool-data_pool_01 datarate": "#890F02",
+            "pool-data_pool_01 iops": "#BF1B00"
           },
           "annotate": {
             "enable": false
           },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 1,
-          "points": false,
-          "pointradius": 5,
           "bars": false,
-          "stack": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 15,
           "legend": {
-            "show": true,
-            "values": false,
-            "min": false,
-            "max": false,
+            "avg": false,
             "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
             "total": false,
-            "avg": false
+            "values": false
           },
-          "percentage": false,
-          "zerofill": true,
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "loadingEditor": false,
+          "minSpan": 6,
           "nullPointMode": "connected",
-          "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeat": "pool",
+          "resolution": 100,
+          "scale": 1,
+          "scopedVars": {
+            "pool": {
+              "text": "pool-cache_pool_00",
+              "value": "pool-cache_pool_00",
+              "selected": false
+            }
           },
+          "seriesOverrides": [
+            {
+              "alias": "datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-cache_pool_00 datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-data_pool_00 datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-data_pool_01 datarate",
+              "yaxis": 2
+            }
+          ],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
           "targets": [
             {
+              "refId": "D",
+              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_op_per_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 iops')",
+              "textEditor": false
+            },
+            {
+              "refId": "A",
+              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_bytes_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 datarate')",
+              "textEditor": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "$pool Write Throughput",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "iops",
+              "show": true
+            },
+            {
+              "format": "Bps",
+              "show": true
+            }
+          ],
+          "zerofill": true
+        },
+        {
+          "aliasColors": {
+            "Read datarate": "#70DBED",
+            "Read iops": "#052B51",
+            "Write datarate": "#E0752D",
+            "Write iops": "#890F02",
+            "datarate": "#C15C17",
+            "iops": "#BF1B00",
+            "pool-cache_pool_00 datarate": "#3F6833",
+            "pool-cache_pool_00 iops": "#7EB26D",
+            "pool-data_pool_00 datarate": "#0A437C",
+            "pool-data_pool_00 iops": "#6ED0E0",
+            "pool-data_pool_01 datarate": "#890F02",
+            "pool-data_pool_01 iops": "#BF1B00"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 16,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "loadingEditor": false,
+          "minSpan": 6,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeat": "pool",
+          "resolution": 100,
+          "scale": 1,
+          "scopedVars": {
+            "pool": {
+              "text": "pool-cache_pool_00",
+              "value": "pool-cache_pool_00",
+              "selected": false
+            }
+          },
+          "seriesOverrides": [
+            {
+              "alias": "datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-cache_pool_00 datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-data_pool_00 datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-data_pool_01 datarate",
+              "yaxis": 2
+            }
+          ],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "D",
+              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].[[pool]].gauge.read_op_per_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 iops')",
+              "textEditor": false
+            },
+            {
+              "refId": "A",
+              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].[[pool]].gauge.read_bytes_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 datarate')",
+              "textEditor": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "$pool Read Throughput",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "iops",
+              "show": true
+            },
+            {
+              "format": "Bps",
+              "show": true
+            }
+          ],
+          "zerofill": true
+        },
+        {
+          "aliasColors": {
+            "Read datarate": "#70DBED",
+            "Read iops": "#052B51",
+            "Write datarate": "#E0752D",
+            "Write iops": "#890F02",
+            "datarate": "#C15C17",
+            "iops": "#BF1B00",
+            "pool-cache_pool_00 datarate": "#3F6833",
+            "pool-cache_pool_00 iops": "#7EB26D",
+            "pool-data_pool_00 datarate": "#0A437C",
+            "pool-data_pool_00 iops": "#6ED0E0",
+            "pool-data_pool_01 datarate": "#890F02",
+            "pool-data_pool_01 iops": "#BF1B00"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 17,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "loadingEditor": false,
+          "minSpan": 6,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeat": null,
+          "resolution": 100,
+          "scale": 1,
+          "scopedVars": {
+            "pool": {
+              "text": "pool-data_pool_00",
+              "value": "pool-data_pool_00",
+              "selected": false
+            }
+          },
+          "seriesOverrides": [
+            {
+              "alias": "datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-cache_pool_00 datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-data_pool_00 datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-data_pool_01 datarate",
+              "yaxis": 2
+            }
+          ],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "D",
+              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_op_per_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 iops')",
+              "textEditor": false
+            },
+            {
+              "refId": "A",
+              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_bytes_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 datarate')",
+              "textEditor": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "$pool Write Throughput",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "iops",
+              "show": true
+            },
+            {
+              "format": "Bps",
+              "show": true
+            }
+          ],
+          "zerofill": true,
+          "repeatIteration": 1478529756325,
+          "repeatPanelId": 15
+        },
+        {
+          "aliasColors": {
+            "Read datarate": "#70DBED",
+            "Read iops": "#052B51",
+            "Write datarate": "#E0752D",
+            "Write iops": "#890F02",
+            "datarate": "#C15C17",
+            "iops": "#BF1B00",
+            "pool-cache_pool_00 datarate": "#3F6833",
+            "pool-cache_pool_00 iops": "#7EB26D",
+            "pool-data_pool_00 datarate": "#0A437C",
+            "pool-data_pool_00 iops": "#6ED0E0",
+            "pool-data_pool_01 datarate": "#890F02",
+            "pool-data_pool_01 iops": "#BF1B00"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 18,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "loadingEditor": false,
+          "minSpan": 6,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeat": null,
+          "resolution": 100,
+          "scale": 1,
+          "scopedVars": {
+            "pool": {
+              "text": "pool-data_pool_01",
+              "value": "pool-data_pool_01",
+              "selected": false
+            }
+          },
+          "seriesOverrides": [
+            {
+              "alias": "datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-cache_pool_00 datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-data_pool_00 datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-data_pool_01 datarate",
+              "yaxis": 2
+            }
+          ],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "D",
+              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_op_per_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 iops')",
+              "textEditor": false
+            },
+            {
+              "refId": "A",
+              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_bytes_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 datarate')",
+              "textEditor": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "$pool Write Throughput",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "iops",
+              "show": true
+            },
+            {
+              "format": "Bps",
+              "show": true
+            }
+          ],
+          "zerofill": true,
+          "repeatIteration": 1478529756325,
+          "repeatPanelId": 15
+        },
+        {
+          "aliasColors": {
+            "Read datarate": "#70DBED",
+            "Read iops": "#052B51",
+            "Write datarate": "#E0752D",
+            "Write iops": "#890F02",
+            "datarate": "#C15C17",
+            "iops": "#BF1B00",
+            "pool-cache_pool_00 datarate": "#3F6833",
+            "pool-cache_pool_00 iops": "#7EB26D",
+            "pool-data_pool_00 datarate": "#0A437C",
+            "pool-data_pool_00 iops": "#6ED0E0",
+            "pool-data_pool_01 datarate": "#890F02",
+            "pool-data_pool_01 iops": "#BF1B00"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 19,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "loadingEditor": false,
+          "minSpan": 6,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeat": null,
+          "resolution": 100,
+          "scale": 1,
+          "scopedVars": {
+            "pool": {
+              "text": "pool-data_pool_00",
+              "value": "pool-data_pool_00",
+              "selected": false
+            }
+          },
+          "seriesOverrides": [
+            {
+              "alias": "datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-cache_pool_00 datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-data_pool_00 datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-data_pool_01 datarate",
+              "yaxis": 2
+            }
+          ],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "D",
+              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].[[pool]].gauge.read_op_per_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 iops')",
+              "textEditor": false
+            },
+            {
+              "refId": "A",
+              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].[[pool]].gauge.read_bytes_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 datarate')",
+              "textEditor": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "$pool Read Throughput",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "iops",
+              "show": true
+            },
+            {
+              "format": "Bps",
+              "show": true
+            }
+          ],
+          "zerofill": true,
+          "repeatIteration": 1478529756325,
+          "repeatPanelId": 16
+        },
+        {
+          "aliasColors": {
+            "Read datarate": "#70DBED",
+            "Read iops": "#052B51",
+            "Write datarate": "#E0752D",
+            "Write iops": "#890F02",
+            "datarate": "#C15C17",
+            "iops": "#BF1B00",
+            "pool-cache_pool_00 datarate": "#3F6833",
+            "pool-cache_pool_00 iops": "#7EB26D",
+            "pool-data_pool_00 datarate": "#0A437C",
+            "pool-data_pool_00 iops": "#6ED0E0",
+            "pool-data_pool_01 datarate": "#890F02",
+            "pool-data_pool_01 iops": "#BF1B00"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 20,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "loadingEditor": false,
+          "minSpan": 6,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeat": null,
+          "resolution": 100,
+          "scale": 1,
+          "scopedVars": {
+            "pool": {
+              "text": "pool-data_pool_01",
+              "value": "pool-data_pool_01",
+              "selected": false
+            }
+          },
+          "seriesOverrides": [
+            {
+              "alias": "datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-cache_pool_00 datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-data_pool_00 datarate",
+              "yaxis": 2
+            },
+            {
+              "alias": "pool-data_pool_01 datarate",
+              "yaxis": 2
+            }
+          ],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "D",
+              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].[[pool]].gauge.read_op_per_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 iops')",
+              "textEditor": false
+            },
+            {
+              "refId": "A",
+              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].[[pool]].gauge.read_bytes_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 datarate')",
+              "textEditor": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "$pool Read Throughput",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "iops",
+              "show": true
+            },
+            {
+              "format": "Bps",
+              "show": true
+            }
+          ],
+          "zerofill": true,
+          "repeatIteration": 1478529756325,
+          "repeatPanelId": 16
+        }
+      ],
+      "showTitle": true,
+      "title": "by pool overview"
+    },
+    {
+      "collapsable": true,
+      "collapse": false,
+      "editable": true,
+      "height": "250px",
+      "notice": false,
+      "panels": [
+        {
+          "aliasColors": {},
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 8,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "loadingEditor": false,
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "A",
               "target": "aliasByNode(collectd.*.[[cluster]].osd-*.gauge.apply_latency_ms,3)"
             }
           ],
-          "aliasColors": {},
-          "aliasYAxis": {},
-          "title": "OSD Apply Latency"
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "OSD Apply Latency",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "ms",
+              "show": true
+            },
+            {
+              "format": "short",
+              "show": true
+            }
+          ],
+          "zerofill": true
         },
         {
-          "span": 6,
-          "editable": true,
-          "type": "graphite",
-          "loadingEditor": false,
+          "aliasColors": {},
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
           "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_formats": [
-            "ms",
-            "short"
-          ],
+          "editable": true,
+          "fill": 0,
           "grid": {
             "max": null,
             "min": 0,
             "threshold1": null,
-            "threshold2": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "annotate": {
-            "enable": false
-          },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 1,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
+          "id": 9,
           "legend": {
-            "show": true,
-            "values": false,
-            "min": false,
-            "max": false,
+            "avg": false,
             "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
             "total": false,
-            "avg": false
+            "values": false
           },
-          "percentage": false,
-          "zerofill": true,
+          "lines": true,
+          "linewidth": 1,
+          "loadingEditor": false,
           "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
           "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true
-          },
           "targets": [
             {
+              "refId": "A",
               "target": "aliasByNode(collectd.*.[[cluster]].osd-*.gauge.commit_latency_ms,3)"
             }
           ],
-          "aliasColors": {},
-          "aliasYAxis": {},
-          "title": "OSD Commit Latency"
-        }
-      ],
-      "notice": false
-    },
-    {
-      "title": "",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
-      "collapsable": true,
-      "panels": [
-        {
-          "span": 6,
-          "editable": true,
-          "type": "graphite",
-          "loadingEditor": false,
-          "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_formats": [
-            "bytes",
-            "short"
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "OSD Commit Latency",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "ms",
+              "show": true
+            },
+            {
+              "format": "short",
+              "show": true
+            }
           ],
+          "zerofill": true
+        },
+        {
+          "aliasColors": {},
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
+          "datasource": null,
+          "editable": true,
+          "fill": 0,
           "grid": {
             "max": null,
             "min": 0,
             "threshold1": null,
-            "threshold2": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "annotate": {
-            "enable": false
-          },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 1,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
+          "id": 10,
           "legend": {
-            "show": true,
-            "values": false,
-            "min": false,
-            "max": false,
+            "avg": false,
             "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
             "total": false,
-            "avg": false
+            "values": false
           },
-          "percentage": false,
-          "zerofill": true,
+          "lines": true,
+          "linewidth": 1,
+          "loadingEditor": false,
           "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
           "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true
-          },
           "targets": [
             {
+              "refId": "A",
               "target": "aliasByNode(scale(collectd.*.[[cluster]].osd-*.gauge.kb_used,1000),3)"
             }
           ],
-          "aliasColors": {},
-          "aliasYAxis": {},
-          "title": "OSD Usage"
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "OSD Usage",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "bytes",
+              "show": true
+            },
+            {
+              "format": "short",
+              "show": true
+            }
+          ],
+          "zerofill": true
         },
         {
-          "span": 6,
-          "editable": true,
-          "type": "graphite",
-          "loadingEditor": false,
+          "aliasColors": {},
+          "annotate": {
+            "enable": false
+          },
+          "bars": false,
           "datasource": null,
-          "renderer": "flot",
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_formats": [
-            "none",
-            "short"
-          ],
+          "editable": true,
+          "fill": 0,
           "grid": {
             "max": null,
             "min": 0,
             "threshold1": null,
-            "threshold2": null,
             "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "annotate": {
-            "enable": false
-          },
-          "resolution": 100,
-          "lines": true,
-          "fill": 0,
-          "linewidth": 1,
-          "points": false,
-          "pointradius": 5,
-          "bars": false,
-          "stack": false,
+          "id": 11,
           "legend": {
-            "show": true,
-            "values": false,
-            "min": false,
-            "max": false,
+            "avg": false,
             "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
             "total": false,
-            "avg": false
+            "values": false
           },
-          "percentage": false,
-          "zerofill": true,
+          "lines": true,
+          "linewidth": 1,
+          "loadingEditor": false,
           "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "resolution": 100,
+          "scale": 1,
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
           "steppedLine": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true
-          },
           "targets": [
             {
+              "refId": "A",
               "target": "aliasByNode(collectd.*.[[cluster]].osd-*.gauge.num_snap_trimming,3)"
             }
           ],
-          "aliasColors": {},
-          "aliasYAxis": {},
-          "title": "OSD Snap Trimming"
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "OSD Snap Trimming",
+          "tooltip": {
+            "msResolution": false,
+            "query_as_alias": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "none",
+              "show": true
+            },
+            {
+              "format": "short",
+              "show": true
+            }
+          ],
+          "zerofill": true
         }
       ],
-      "notice": false
+      "showTitle": true,
+      "title": "OSD overview"
     }
   ],
-  "editable": true,
-  "failover": false,
-  "panel_hints": true,
-  "style": "dark",
-  "pulldowns": [
-    {
-      "type": "filtering",
-      "collapse": false,
-      "notice": false,
-      "enable": true
-    },
-    {
-      "type": "annotations",
-      "enable": false
-    }
-  ],
-  "nav": [
-    {
-      "type": "timepicker",
-      "collapse": false,
-      "notice": false,
-      "enable": true,
-      "status": "Stable",
-      "time_options": [
-        "5m",
-        "15m",
-        "1h",
-        "6h",
-        "12h",
-        "24h",
-        "2d",
-        "7d",
-        "30d"
-      ],
-      "refresh_intervals": [
-        "5s",
-        "10s",
-        "30s",
-        "1m",
-        "5m",
-        "15m",
-        "30m",
-        "1h",
-        "2h",
-        "1d"
-      ],
-      "now": true
-    }
-  ],
-  "loader": {
-    "save_gist": false,
-    "save_elasticsearch": true,
-    "save_local": true,
-    "save_default": true,
-    "save_temp": true,
-    "save_temp_ttl_enable": true,
-    "save_temp_ttl": "30d",
-    "load_gist": false,
-    "load_elasticsearch": true,
-    "load_elasticsearch_size": 20,
-    "load_local": false,
-    "hide": false
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {
+    "collapse": false,
+    "enable": true,
+    "notice": false,
+    "now": true,
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "status": "Stable",
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ],
+    "type": "timepicker"
+  },
+  "templating": {
+    "list": [
+      {
+        "allFormat": "glob",
+        "current": {
+          "tags": [],
+          "text": "All",
+          "value": "*"
+        },
+        "datasource": null,
+        "hide": 0,
+        "includeAll": true,
+        "name": "cluster",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "*"
+          },
+          {
+            "selected": false,
+            "text": "ceph-ceph",
+            "value": "ceph-ceph"
+          }
+        ],
+        "query": "collectd.*.ceph-*",
+        "refresh": 0,
+        "type": "query"
+      },
+      {
+        "allFormat": "glob",
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": null,
+        "hide": 0,
+        "includeAll": true,
+        "name": "pool",
+        "options": [
+          {
+            "text": "All",
+            "value": "$__all",
+            "selected": true
+          },
+          {
+            "text": "pool-cache_pool_00",
+            "value": "pool-cache_pool_00",
+            "selected": false
+          },
+          {
+            "text": "pool-data_pool_00",
+            "value": "pool-data_pool_00",
+            "selected": false
+          },
+          {
+            "text": "pool-data_pool_01",
+            "value": "pool-data_pool_01",
+            "selected": false
+          }
+        ],
+        "query": "collectd.*.*.pool-*",
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "annotations": {
+    "list": []
   },
   "refresh": false,
-  "tags": [],
-  "timezone": "browser"
+  "schemaVersion": 12,
+  "version": 14,
+  "links": [],
+  "gnetId": null
 }
