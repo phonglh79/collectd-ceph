@@ -122,7 +122,7 @@ It has plenty of docs on how to use it, but for our specific plugins:
 
 ### Docker
 
-Check [this repo](https://github.com/bobrik/ceph-collectd-graphite) for a nice docker setup to run collectd-ceph (thanks to Ian Babrou).
+Check [this repo](https://github.com/y4ns0l0/ceph-collectd-graphite) for a nice docker setup to run collectd-ceph (thanks to Ian Babrou).
 
 ## Limitations
 
