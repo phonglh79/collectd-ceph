@@ -21,9 +21,11 @@ A set of collectd plugins monitoring and publishing metrics for Ceph components.
 
 Sample Grafana dashboard displaying common metrics from the plugins.
 
-![image](https://raw.github.com/rochaporto/collectd-ceph/master/public/ceph-overview.png)
+![image](public/ceph-overview.png)
 
-![image](https://raw.github.com/rochaporto/collectd-ceph/master/public/ceph-dash2.png)
+![image](public/ceph-overview1.png)
+
+![image](public/ceph-overview2.png)
 
 [Check here](grafana/ceph-overview.json) for the dashboard definition.
 
