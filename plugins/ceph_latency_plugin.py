@@ -67,13 +67,8 @@ class CephLatencyPlugin(base.Base):
         results = regex_match.findall(output)
 
         if len(results) == 0:
-            # this is a fast hack, should put regexps into an array and try 'em all
-            regex_match = re.compile('^([a-zA-Z]+) [lL]atency: +(\w+.?\w+)', re.MULTILINE)
-            results = regex_match.findall(output)
-            if len(results) == 0:
-                # hopeless
-                collectd.error('ceph-latency: failed to run rados bench :: output unrecognized %s' % output)
-                return
+            collectd.error('ceph-latency: failed to run rados bench :: output unrecognized %s' % output)
+            return
 
         data[ceph_cluster]['cluster'] = {}
         for key, value in results:
