@@ -63,7 +63,7 @@ class CephLatencyPlugin(base.Base):
         if output is None:
             collectd.error('ceph-latency: failed to run rados bench :: output was None')
 
-        regex_match = re.compile('^([a-zA-Z]+) [lL]atency\S+: \s* (\w+.?\w+)\s*', re.MULTILINE)
+        regex_match = re.compile('^([a-zA-Z]+) [lL]atency\S*: \s* (\w+.?\w+)\s*', re.MULTILINE)
         results = regex_match.findall(output)
 
         if len(results) == 0:
