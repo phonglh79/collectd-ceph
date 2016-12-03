@@ -71,7 +71,7 @@ class CephPoolPlugin(base.Base):
         # push df results
         for pool in json_df_data['pools']:
             pool_data = data[ceph_cluster]["pool-%s" % pool['name']]
-            for stat in ('bytes_used', 'kb_used', 'objects'):
+            for stat in ('bytes_used', 'kb_used', 'objects','max_avail'):
                 pool_data[stat] = pool['stats'][stat] if pool['stats'].has_key(stat) else 0
 
         # push totals from df
