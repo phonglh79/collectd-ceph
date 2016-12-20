@@ -138,11 +138,11 @@ GPLv2 (check LICENSE).
 
 ## Contributors
 
-Ricardo Rocha <rocha.porto@gmail.com>
+Ricardo Rocha <rocha.porto@gmail.com> & co. 
 
 ## Support
 
-Please log tickets and issues at the [github home](https://github.com/rochaporto/collectd-ceph/issues).
+Please log tickets and issues at the [github home](https://github.com/grinapo/collectd-ceph/issues).
 
 ## Additional Notes
 
