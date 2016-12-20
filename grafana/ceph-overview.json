@@ -1,5 +1,35 @@
 {
-  "id": 3,
+  "__inputs": [
+    {
+      "name": "DS_GRAPHITE",
+      "label": "graphite",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "graphite",
+      "pluginName": "Graphite"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "3.1.1"
+    },
+    {
+      "type": "datasource",
+      "id": "graphite",
+      "name": "Graphite",
+      "version": "1.0.0"
+    }
+  ],
+  "id": null,
   "title": "Ceph Overview",
   "tags": [
     "storage",
@@ -31,7 +61,7 @@
             "enable": false
           },
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_GRAPHITE}",
           "editable": true,
           "fill": 0,
           "grid": {
@@ -131,7 +161,7 @@
             "enable": false
           },
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_GRAPHITE}",
           "editable": true,
           "fill": 0,
           "grid": {
@@ -229,7 +259,7 @@
             "enable": false
           },
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_GRAPHITE}",
           "editable": true,
           "fill": 0,
           "grid": {
@@ -322,7 +352,7 @@
             "enable": false
           },
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_GRAPHITE}",
           "editable": true,
           "fill": 0,
           "grid": {
@@ -407,7 +437,7 @@
             "enable": false
           },
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_GRAPHITE}",
           "editable": true,
           "fill": 0,
           "grid": {
@@ -484,7 +514,7 @@
             "enable": false
           },
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_GRAPHITE}",
           "editable": true,
           "fill": 0,
           "grid": {
@@ -571,7 +601,7 @@
             "enable": false
           },
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_GRAPHITE}",
           "editable": true,
           "fill": 0,
           "grid": {
@@ -736,7 +766,7 @@
             "enable": false
           },
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_GRAPHITE}",
           "editable": true,
           "fill": 0,
           "grid": {
@@ -768,16 +798,10 @@
           "points": false,
           "renderer": "flot",
           "repeat": null,
-          "repeatIteration": 1478697883907,
+          "repeatIteration": 1482227113843,
           "resolution": 100,
           "scale": 1,
-          "scopedVars": {
-            "pool": {
-              "text": "pool-cache_pool_00",
-              "value": "pool-cache_pool_00",
-              "selected": false
-            }
-          },
+          "scopedVars": {},
           "seriesOverrides": [
             {
               "alias": "datarate",
@@ -856,7 +880,7 @@
             "enable": false
           },
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_GRAPHITE}",
           "editable": true,
           "fill": 0,
           "grid": {
@@ -888,16 +912,10 @@
           "points": false,
           "renderer": "flot",
           "repeat": null,
-          "repeatIteration": 1478697883907,
+          "repeatIteration": 1482227113843,
           "resolution": 100,
           "scale": 1,
-          "scopedVars": {
-            "pool": {
-              "text": "pool-cache_pool_00",
-              "value": "pool-cache_pool_00",
-              "selected": false
-            }
-          },
+          "scopedVars": {},
           "seriesOverrides": [
             {
               "alias": "datarate",
@@ -961,8 +979,8 @@
       "repeat": "pool",
       "scopedVars": {
         "pool": {
-          "text": "pool-cache_pool_00",
-          "value": "pool-cache_pool_00",
+          "text": "pool-data_pool_00",
+          "value": "pool-data_pool_00",
           "selected": false
         }
       },
@@ -977,534 +995,12 @@
       "notice": false,
       "panels": [
         {
-          "aliasColors": {
-            "Read datarate": "#70DBED",
-            "Read iops": "#052B51",
-            "Write datarate": "#E0752D",
-            "Write iops": "#890F02",
-            "datarate": "#C15C17",
-            "iops": "#BF1B00",
-            "pool-cache_pool_00 datarate": "#3F6833",
-            "pool-cache_pool_00 iops": "#7EB26D",
-            "pool-data_pool_00 datarate": "#0A437C",
-            "pool-data_pool_00 iops": "#6ED0E0",
-            "pool-data_pool_01 datarate": "#890F02",
-            "pool-data_pool_01 iops": "#BF1B00"
-          },
-          "annotate": {
-            "enable": false
-          },
-          "bars": false,
-          "datasource": null,
-          "editable": true,
-          "fill": 0,
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 17,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "loadingEditor": false,
-          "minSpan": 6,
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1478697883907,
-          "resolution": 100,
-          "scale": 1,
-          "scopedVars": {
-            "pool": {
-              "text": "pool-data_pool_00",
-              "value": "pool-data_pool_00",
-              "selected": false
-            }
-          },
-          "seriesOverrides": [
-            {
-              "alias": "datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-cache_pool_00 datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-data_pool_00 datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-data_pool_01 datarate",
-              "yaxis": 2
-            }
-          ],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "refId": "D",
-              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_op_per_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 iops')",
-              "textEditor": false
-            },
-            {
-              "refId": "A",
-              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_bytes_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 datarate')",
-              "textEditor": false
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$pool Write Throughput",
-          "tooltip": {
-            "msResolution": false,
-            "query_as_alias": true,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "iops",
-              "show": true
-            },
-            {
-              "format": "Bps",
-              "show": true
-            }
-          ],
-          "zerofill": true
-        },
-        {
-          "aliasColors": {
-            "Read datarate": "#70DBED",
-            "Read iops": "#052B51",
-            "Write datarate": "#E0752D",
-            "Write iops": "#890F02",
-            "datarate": "#C15C17",
-            "iops": "#BF1B00",
-            "pool-cache_pool_00 datarate": "#3F6833",
-            "pool-cache_pool_00 iops": "#7EB26D",
-            "pool-data_pool_00 datarate": "#0A437C",
-            "pool-data_pool_00 iops": "#6ED0E0",
-            "pool-data_pool_01 datarate": "#890F02",
-            "pool-data_pool_01 iops": "#BF1B00"
-          },
-          "annotate": {
-            "enable": false
-          },
-          "bars": false,
-          "datasource": null,
-          "editable": true,
-          "fill": 0,
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 18,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "loadingEditor": false,
-          "minSpan": 6,
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1478697883907,
-          "resolution": 100,
-          "scale": 1,
-          "scopedVars": {
-            "pool": {
-              "text": "pool-data_pool_00",
-              "value": "pool-data_pool_00",
-              "selected": false
-            }
-          },
-          "seriesOverrides": [
-            {
-              "alias": "datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-cache_pool_00 datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-data_pool_00 datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-data_pool_01 datarate",
-              "yaxis": 2
-            }
-          ],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "refId": "D",
-              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].[[pool]].gauge.read_op_per_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 iops')",
-              "textEditor": false
-            },
-            {
-              "refId": "A",
-              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].[[pool]].gauge.read_bytes_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 datarate')",
-              "textEditor": false
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$pool Read Throughput",
-          "tooltip": {
-            "msResolution": false,
-            "query_as_alias": true,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "iops",
-              "show": true
-            },
-            {
-              "format": "Bps",
-              "show": true
-            }
-          ],
-          "zerofill": true
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": 1478697883907,
-      "repeatRowId": 2,
-      "scopedVars": {
-        "pool": {
-          "text": "pool-data_pool_00",
-          "value": "pool-data_pool_00",
-          "selected": false
-        }
-      },
-      "showTitle": true,
-      "title": "$pool overview"
-    },
-    {
-      "collapsable": true,
-      "collapse": false,
-      "editable": true,
-      "height": "250px",
-      "notice": false,
-      "panels": [
-        {
-          "aliasColors": {
-            "Read datarate": "#70DBED",
-            "Read iops": "#052B51",
-            "Write datarate": "#E0752D",
-            "Write iops": "#890F02",
-            "datarate": "#C15C17",
-            "iops": "#BF1B00",
-            "pool-cache_pool_00 datarate": "#3F6833",
-            "pool-cache_pool_00 iops": "#7EB26D",
-            "pool-data_pool_00 datarate": "#0A437C",
-            "pool-data_pool_00 iops": "#6ED0E0",
-            "pool-data_pool_01 datarate": "#890F02",
-            "pool-data_pool_01 iops": "#BF1B00"
-          },
-          "annotate": {
-            "enable": false
-          },
-          "bars": false,
-          "datasource": null,
-          "editable": true,
-          "fill": 0,
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 19,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "loadingEditor": false,
-          "minSpan": 6,
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1478697883907,
-          "resolution": 100,
-          "scale": 1,
-          "scopedVars": {
-            "pool": {
-              "text": "pool-data_pool_01",
-              "value": "pool-data_pool_01",
-              "selected": false
-            }
-          },
-          "seriesOverrides": [
-            {
-              "alias": "datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-cache_pool_00 datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-data_pool_00 datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-data_pool_01 datarate",
-              "yaxis": 2
-            }
-          ],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "refId": "D",
-              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_op_per_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 iops')",
-              "textEditor": false
-            },
-            {
-              "refId": "A",
-              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_bytes_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 datarate')",
-              "textEditor": false
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$pool Write Throughput",
-          "tooltip": {
-            "msResolution": false,
-            "query_as_alias": true,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "iops",
-              "show": true
-            },
-            {
-              "format": "Bps",
-              "show": true
-            }
-          ],
-          "zerofill": true
-        },
-        {
-          "aliasColors": {
-            "Read datarate": "#70DBED",
-            "Read iops": "#052B51",
-            "Write datarate": "#E0752D",
-            "Write iops": "#890F02",
-            "datarate": "#C15C17",
-            "iops": "#BF1B00",
-            "pool-cache_pool_00 datarate": "#3F6833",
-            "pool-cache_pool_00 iops": "#7EB26D",
-            "pool-data_pool_00 datarate": "#0A437C",
-            "pool-data_pool_00 iops": "#6ED0E0",
-            "pool-data_pool_01 datarate": "#890F02",
-            "pool-data_pool_01 iops": "#BF1B00"
-          },
-          "annotate": {
-            "enable": false
-          },
-          "bars": false,
-          "datasource": null,
-          "editable": true,
-          "fill": 0,
-          "grid": {
-            "max": null,
-            "min": 0,
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 20,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "loadingEditor": false,
-          "minSpan": 6,
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1478697883907,
-          "resolution": 100,
-          "scale": 1,
-          "scopedVars": {
-            "pool": {
-              "text": "pool-data_pool_01",
-              "value": "pool-data_pool_01",
-              "selected": false
-            }
-          },
-          "seriesOverrides": [
-            {
-              "alias": "datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-cache_pool_00 datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-data_pool_00 datarate",
-              "yaxis": 2
-            },
-            {
-              "alias": "pool-data_pool_01 datarate",
-              "yaxis": 2
-            }
-          ],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "refId": "D",
-              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].[[pool]].gauge.read_op_per_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 iops')",
-              "textEditor": false
-            },
-            {
-              "refId": "A",
-              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].[[pool]].gauge.read_bytes_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 datarate')",
-              "textEditor": false
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$pool Read Throughput",
-          "tooltip": {
-            "msResolution": false,
-            "query_as_alias": true,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "iops",
-              "show": true
-            },
-            {
-              "format": "Bps",
-              "show": true
-            }
-          ],
-          "zerofill": true
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": 1478697883907,
-      "repeatRowId": 2,
-      "scopedVars": {
-        "pool": {
-          "text": "pool-data_pool_01",
-          "value": "pool-data_pool_01",
-          "selected": false
-        }
-      },
-      "showTitle": true,
-      "title": "$pool overview"
-    },
-    {
-      "collapsable": true,
-      "collapse": false,
-      "editable": true,
-      "height": "250px",
-      "notice": false,
-      "panels": [
-        {
           "aliasColors": {},
           "annotate": {
             "enable": false
           },
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_GRAPHITE}",
           "editable": true,
           "fill": 0,
           "grid": {
@@ -1527,6 +1023,7 @@
           },
           "lines": true,
           "linewidth": 1,
+          "links": [],
           "loadingEditor": false,
           "nullPointMode": "connected",
           "percentage": false,
@@ -1542,12 +1039,13 @@
           "targets": [
             {
               "refId": "A",
-              "target": "aliasByNode(collectd.*.[[cluster]].osd-*.gauge.apply_latency_ms,3)"
+              "target": "aliasByNode(highestMax(collectd.*.[[cluster]].osd-*.gauge.apply_latency_ms, 5), 3)",
+              "textEditor": false
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "OSD Apply Latency",
+          "title": "TOP 5 OSD Apply Latency",
           "tooltip": {
             "msResolution": false,
             "query_as_alias": true,
@@ -1577,7 +1075,7 @@
             "enable": false
           },
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_GRAPHITE}",
           "editable": true,
           "fill": 0,
           "grid": {
@@ -1600,6 +1098,7 @@
           },
           "lines": true,
           "linewidth": 1,
+          "links": [],
           "loadingEditor": false,
           "nullPointMode": "connected",
           "percentage": false,
@@ -1615,12 +1114,12 @@
           "targets": [
             {
               "refId": "A",
-              "target": "aliasByNode(collectd.*.[[cluster]].osd-*.gauge.commit_latency_ms,3)"
+              "target": "aliasByNode(highestMax(collectd.*.[[cluster]].osd-*.gauge.commit_latency_ms, 5), 3)"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "OSD Commit Latency",
+          "title": "TOP 5 OSD Commit Latency",
           "tooltip": {
             "msResolution": false,
             "query_as_alias": true,
@@ -1650,7 +1149,7 @@
             "enable": false
           },
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_GRAPHITE}",
           "editable": true,
           "fill": 0,
           "grid": {
@@ -1673,6 +1172,7 @@
           },
           "lines": true,
           "linewidth": 1,
+          "links": [],
           "loadingEditor": false,
           "nullPointMode": "connected",
           "percentage": false,
@@ -1723,7 +1223,7 @@
             "enable": false
           },
           "bars": false,
-          "datasource": null,
+          "datasource": "${DS_GRAPHITE}",
           "editable": true,
           "fill": 0,
           "grid": {
@@ -1834,63 +1334,24 @@
     "list": [
       {
         "allFormat": "glob",
-        "current": {
-          "tags": [],
-          "text": "All",
-          "value": "*"
-        },
-        "datasource": null,
+        "current": {},
+        "datasource": "${DS_GRAPHITE}",
         "hide": 0,
         "includeAll": true,
         "name": "cluster",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "*"
-          },
-          {
-            "selected": false,
-            "text": "ceph-ceph",
-            "value": "ceph-ceph"
-          }
-        ],
+        "options": [],
         "query": "collectd.*.ceph-*",
-        "refresh": 0,
+        "refresh": 1,
         "type": "query"
       },
       {
         "allFormat": "glob",
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": null,
+        "current": {},
+        "datasource": "${DS_GRAPHITE}",
         "hide": 0,
         "includeAll": true,
         "name": "pool",
-        "options": [
-          {
-            "text": "All",
-            "value": "$__all",
-            "selected": true
-          },
-          {
-            "text": "pool-cache_pool_00",
-            "value": "pool-cache_pool_00",
-            "selected": false
-          },
-          {
-            "text": "pool-data_pool_00",
-            "value": "pool-data_pool_00",
-            "selected": false
-          },
-          {
-            "text": "pool-data_pool_01",
-            "value": "pool-data_pool_01",
-            "selected": false
-          }
-        ],
+        "options": [],
         "query": "collectd.*.*.pool-*",
         "refresh": 1,
         "regex": "",
@@ -1901,9 +1362,9 @@
   "annotations": {
     "list": []
   },
-  "refresh": false,
+  "refresh": "1m",
   "schemaVersion": 12,
-  "version": 19,
+  "version": 22,
   "links": [],
   "gnetId": null
 }
