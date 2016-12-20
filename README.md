@@ -69,7 +69,8 @@ Find below a list of the available plugins and the metrics they publish.
 
 It assumes an existing installation of [collectd](http://collectd.org/documentation.shtml) - check docs for details.
 
-If you want to publish to [graphite](http://graphite.readthedocs.org/), configure the [write_graphite](https://collectd.org/wiki/index.php/Plugin:Write_Graphite) collectd plugin.
+If you want to publish to [graphite](http://graphite.readthedocs.org/), configure 
+the [write_graphite](https://collectd.org/wiki/index.php/Plugin:Write_Graphite) collectd plugin.
 
 And you might want the awesome [grafana](http://grafana.org) too, which provides awesome displays.
 
@@ -138,7 +139,13 @@ GPLv2 (check LICENSE).
 
 ## Contributors
 
-Ricardo Rocha <rocha.porto@gmail.com> & co. 
+Ricardo Rocha <rocha.porto@gmail.com> - original author
+Peter Gervai <grinapo/gmail> - merge maintainer
+Yann Matysiak (y4ns0l0)
+Pietari Hyvärinen (kallio)
+gcmalloc
+cfz
+tynorth-cisco
 
 ## Support
 
