@@ -68,6 +68,9 @@ class CephLatencyPlugin(base.Base):
 
         if len(results) == 0:
             # this is a fast hack, should put regexps into an array and try 'em all
+            # my format:
+            ## Average Latency:        0.00517643
+            ## Stddev Latency:         0.00179458
             regex_match = re.compile('^([a-zA-Z]+) [lL]atency: +(\w+.?\w+)', re.MULTILINE)
             results = regex_match.findall(output)
             if len(results) == 0:
