@@ -63,8 +63,11 @@ class CephOsdPlugin(base.Base):
             pool_name = "pool-%s" % pool['pool_name']
             data[ceph_cluster][pool_name] = {}
             data[ceph_cluster][pool_name]['size'] = pool['size']
+            data[ceph_cluster][pool_name]['min_size'] = pool['min_size']
             data[ceph_cluster][pool_name]['pg_num'] = pool['pg_num']
             data[ceph_cluster][pool_name]['pgp_num'] = pool['pg_placement_num']
+            data[ceph_cluster][pool_name]['quota_max_bytes'] = pool['quota_max_bytes']
+            data[ceph_cluster][pool_name]['quota_max_objects'] = pool['quota_max_objects']
 
         osd_data = data[ceph_cluster]['osd']
         # number of osds in each possible state
