@@ -753,8 +753,8 @@
             "Read iops": "#052B51",
             "Write datarate": "#E0752D",
             "Write iops": "#890F02",
-            "datarate": "#C15C17",
-            "iops": "#BF1B00",
+            "datarate": "#3F6833",
+            "iops": "#6ED0E0",
             "pool-cache_pool_00 datarate": "#3F6833",
             "pool-cache_pool_00 iops": "#7EB26D",
             "pool-data_pool_00 datarate": "#0A437C",
@@ -798,7 +798,7 @@
           "points": false,
           "renderer": "flot",
           "repeat": null,
-          "repeatIteration": 1482227113843,
+          "repeatIteration": 1482412835383,
           "resolution": 100,
           "scale": 1,
           "scopedVars": {},
@@ -826,12 +826,12 @@
           "targets": [
             {
               "refId": "D",
-              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_op_per_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 iops')",
+              "target": "alias(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_op_per_sec, 99), 'iops')",
               "textEditor": false
             },
             {
               "refId": "A",
-              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_bytes_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 datarate')",
+              "target": "alias(removeAbovePercentile(collectd.*.[[cluster]].$pool.gauge.write_bytes_sec, 99), 'datarate')",
               "textEditor": false
             }
           ],
@@ -867,8 +867,8 @@
             "Read iops": "#052B51",
             "Write datarate": "#E0752D",
             "Write iops": "#890F02",
-            "datarate": "#C15C17",
-            "iops": "#BF1B00",
+            "datarate": "#508642",
+            "iops": "#447EBC",
             "pool-cache_pool_00 datarate": "#3F6833",
             "pool-cache_pool_00 iops": "#7EB26D",
             "pool-data_pool_00 datarate": "#0A437C",
@@ -912,7 +912,7 @@
           "points": false,
           "renderer": "flot",
           "repeat": null,
-          "repeatIteration": 1482227113843,
+          "repeatIteration": 1482412835383,
           "resolution": 100,
           "scale": 1,
           "scopedVars": {},
@@ -940,12 +940,12 @@
           "targets": [
             {
               "refId": "D",
-              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].[[pool]].gauge.read_op_per_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 iops')",
+              "target": "alias(removeAbovePercentile(collectd.*.[[cluster]].[[pool]].gauge.read_op_per_sec, 99), 'iops')",
               "textEditor": false
             },
             {
               "refId": "A",
-              "target": "aliasSub(removeAbovePercentile(collectd.*.[[cluster]].[[pool]].gauge.read_bytes_sec, 99), '^.*(pool-.*)\\.gauge.*', '\\1 datarate')",
+              "target": "alias(removeAbovePercentile(collectd.*.[[cluster]].[[pool]].gauge.read_bytes_sec, 99), 'datarate')",
               "textEditor": false
             }
           ],
@@ -979,8 +979,8 @@
       "repeat": "pool",
       "scopedVars": {
         "pool": {
-          "text": "pool-data_pool_00",
-          "value": "pool-data_pool_00",
+          "text": "pool-cinder-backup",
+          "value": "pool-cinder-backup",
           "selected": false
         }
       },
@@ -1364,7 +1364,7 @@
   },
   "refresh": "1m",
   "schemaVersion": 12,
-  "version": 22,
+  "version": 26,
   "links": [],
   "gnetId": null
 }
