@@ -48,9 +48,13 @@ class CephPoolPlugin(base.Base):
 
         data = { ceph_cluster: {} }
 
-        stats_output = self.exec_cmd('osd pool stats')
-        df_output = self.exec_cmd('df')
-        if stats_output is None or df_output is None:
+        stats_output = None
+        try:
+            stats_output = self.exec_cmd('osd pool stats')
+            df_output = self.exec_cmd('df')
+        except Exception as exc:
+            collectd.error("ceph-pool: failed to ceph pool stats :: %s :: %s"
+                    % (exc, traceback.format_exc()))
             return
 
         json_stats_data = json.loads(stats_output)
@@ -61,13 +65,13 @@ class CephPoolPlugin(base.Base):
             pool_key = "pool-%s" % pool['pool_name']
             data[ceph_cluster][pool_key] = {}
             pool_data = data[ceph_cluster][pool_key] 
-            for stat in ('read_bytes_sec', 'write_bytes_sec', 'op_per_sec'):
+            for stat in ('read_bytes_sec', 'write_bytes_sec', 'op_per_sec', 'write_op_per_sec', 'read_op_per_sec'):
                 pool_data[stat] = pool['client_io_rate'][stat] if pool['client_io_rate'].has_key(stat) else 0
 
         # push df results
         for pool in json_df_data['pools']:
             pool_data = data[ceph_cluster]["pool-%s" % pool['name']]
-            for stat in ('bytes_used', 'kb_used', 'objects'):
+            for stat in ('bytes_used', 'kb_used', 'objects','max_avail'):
                 pool_data[stat] = pool['stats'][stat] if pool['stats'].has_key(stat) else 0
 
         # push totals from df
@@ -94,11 +98,11 @@ except Exception as exc:
 def configure_callback(conf):
     """Received configuration information"""
     plugin.config_callback(conf)
+    collectd.register_read(read_callback, plugin.interval)
 
 def read_callback():
     """Callback triggerred by collectd on read"""
     plugin.read_callback()
 
+collectd.register_init(CephPoolPlugin.reset_sigchld)
 collectd.register_config(configure_callback)
-collectd.register_read(read_callback, plugin.interval)
-

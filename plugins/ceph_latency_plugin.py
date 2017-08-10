@@ -30,6 +30,7 @@
 #
 
 import collectd
+import re
 import traceback
 import subprocess
 
@@ -46,12 +47,14 @@ class CephLatencyPlugin(base.Base):
 
         ceph_cluster = "%s-%s" % (self.prefix, self.cluster)
 
-        data = { ceph_cluster: {} }
+        data = {
+            ceph_cluster: {},
+        }
 
         output = None
         try:
-            output = subprocess.check_output(
-              "timeout 30s rados --cluster "+ self.cluster +" -p data bench 10 write -t 1 -b 65536 2>/dev/null | grep -i latency | awk '{print 1000*$3}'", shell=True)
+            command = "timeout 30s rados --cluster %s -p %s bench 10 write -t 1 -b 65536" % (self.cluster, format(self.testpool))
+            output = subprocess.check_output(command, shell=True)
         except Exception as exc:
             collectd.error("ceph-latency: failed to run rados bench :: %s :: %s"
                     % (exc, traceback.format_exc()))
@@ -60,13 +63,31 @@ class CephLatencyPlugin(base.Base):
         if output is None:
             collectd.error('ceph-latency: failed to run rados bench :: output was None')
 
-        results = output.split('\n')
-        # push values
+        regex_match = re.compile('^([a-zA-Z]+) [lL]atency\S*: \s* (\w+.?\w+)\s*', re.MULTILINE)
+        results = regex_match.findall(output)
+
+        if len(results) == 0:
+            # this is a fast hack, should put regexps into an array and try 'em all
+            # my format:
+            ## Average Latency:        0.00517643
+            ## Stddev Latency:         0.00179458
+            regex_match = re.compile('^([a-zA-Z]+) [lL]atency: +(\w+.?\w+)', re.MULTILINE)
+            results = regex_match.findall(output)
+            if len(results) == 0:
+                # hopeless
+                collectd.error('ceph-latency: failed to run rados bench :: output unrecognized %s' % output)
+                return
+
         data[ceph_cluster]['cluster'] = {}
-        data[ceph_cluster]['cluster']['avg_latency'] = results[0]
-        data[ceph_cluster]['cluster']['stddev_latency'] = results[1]
-        data[ceph_cluster]['cluster']['max_latency'] = results[2]
-        data[ceph_cluster]['cluster']['min_latency'] = results[3]
+        for key, value in results:
+            if key == 'Average':
+                data[ceph_cluster]['cluster']['avg_latency'] = float(value) * 1000
+            elif key == 'Stddev':
+                data[ceph_cluster]['cluster']['stddev_latency'] = float(value) * 1000
+            elif key == 'Max':
+                data[ceph_cluster]['cluster']['max_latency'] = float(value) * 1000
+            elif key == 'Min':
+                data[ceph_cluster]['cluster']['min_latency'] = float(value) * 1000
 
         return data
 
@@ -79,11 +100,11 @@ except Exception as exc:
 def configure_callback(conf):
     """Received configuration information"""
     plugin.config_callback(conf)
+    collectd.register_read(read_callback, plugin.interval)
 
 def read_callback():
     """Callback triggerred by collectd on read"""
     plugin.read_callback()
 
+collectd.register_init(CephLatencyPlugin.reset_sigchld)
 collectd.register_config(configure_callback)
-collectd.register_read(read_callback, plugin.interval)
-

@@ -1,3 +1,15 @@
+This is a fork of rochaporto's version, which seems to have been abandoned 
+around 2015, with plenty of bugs and pull requests lying around. I have tried
+to incorporate most of the outstanding pulls and some of the interesting looking 
+but not overly conflicting forks.
+
+If __you__ have a clean pull request I will eventually try to merge in. I don't
+promise to fix issues but if anyone do I'll merge it.
+
+I don't really want to maintain this but I don't want to let it lying bug-ridden,
+I want to use it. 
+
+
 collectd-ceph
 ==================
 
@@ -7,13 +19,21 @@ A set of collectd plugins monitoring and publishing metrics for Ceph components.
 
 ## Screenshots
 
-Sample Grafana dashboard displaying common metrics from the plugins.
+Sample __Ceph Overview__ dashboard displaying common metrics from the plugins.
 
-![image](https://raw.github.com/rochaporto/collectd-ceph/master/public/ceph-overview.png)
+![image](public/ceph-overview.png)
 
-![image](https://raw.github.com/rochaporto/collectd-ceph/master/public/ceph-dash2.png)
+![image](public/ceph-overview1.png)
 
-[Check here](grafana/ceph-overview.json) for the dashboard definition.
+![image](public/ceph-overview2.png)
+
+Sample __Ceph Pool Capacity__ dashboard, if you are using pool quota this sample may be usefull.
+
+![image](public/ceph-pool-capacity.png)
+
+[Check here](grafana/ceph-overview.json) for the __Ceph Overview__ dashboard definition.
+
+[Check here](grafana/ceph-pool-capacity.json) for the __Ceph Pool Capacity__ dashboard definition.
 
 ## Plugins and Metrics
 
@@ -30,12 +50,22 @@ Find below a list of the available plugins and the metrics they publish.
   * ceph-&lt;cluster>.osd.gauge.in (number of osds 'in')
   * ceph-&lt;cluster>.osd.gauge.out (number of osds 'out')
 * ceph_pool_plugin
+  * ceph-&lt;cluster>.pool-&lt;name>.gauge.size (per pool size)
+  * ceph-&lt;cluster>.pool-&lt;name>.gauge.min_size (per pool min_size)
+  * ceph-&lt;cluster>.pool-&lt;name>.gauge.pg_num (per pool pg_num)
+  * ceph-&lt;cluster>.pool-&lt;name>.gauge.pgp_num (per pool pg_placement_num)
+  * ceph-&lt;cluster>.pool-&lt;name>.gauge.quota_max_bytes (per pool quota_max_bytes)
+  * ceph-&lt;cluster>.pool-&lt;name>.gauge.quota_max_objects (per pool quota_max_objects)
+  * ceph-&lt;cluster>.pool-&lt;name>.gauge.max_avail (per pool max_available)
+  * ceph-&lt;cluster>.pool-&lt;name>.gauge.objects (per pool objects number)
+  * ceph-&lt;cluster>.pool-&lt;name>.gauge.objects (per pool objects number)
   * ceph-&lt;cluster>.pool-&lt;name>.gauge.read_bytes_sec (per pool read bytes/sec)
   * ceph-&lt;cluster>.pool-&lt;name>.gauge.write_bytes_sec (per pool write bytes/sec)
   * ceph-&lt;cluster>.pool-&lt;name>.gauge.op_per_sec (per pool iops)
   * ceph-&lt;cluster>.pool-&lt;name>.gauge.bytes_used (per pool bytes used)
   * ceph-&lt;cluster>.pool-&lt;name>.gauge.kb_used (per pool KBytes used)
   * ceph-&lt;cluster>.pool-&lt;name>.gauge.objects (per pool number of objects)
+  min_size
   * ceph-&lt;cluster>.cluster.gauge.total_avail (cluster space available)
   * ceph-&lt;cluster>.cluster.gauge.total_space (cluster total raw space)
   * ceph-&lt;cluster>.cluster.gauge.total_used (cluster raw space used)
@@ -55,7 +85,8 @@ Find below a list of the available plugins and the metrics they publish.
 
 It assumes an existing installation of [collectd](http://collectd.org/documentation.shtml) - check docs for details.
 
-If you want to publish to [graphite](http://graphite.readthedocs.org/), configure the [write_graphite](https://collectd.org/wiki/index.php/Plugin:Write_Graphite) collectd plugin.
+If you want to publish to [graphite](http://graphite.readthedocs.org/), configure 
+the [write_graphite](https://collectd.org/wiki/index.php/Plugin:Write_Graphite) collectd plugin.
 
 And you might want the awesome [grafana](http://grafana.org) too, which provides awesome displays.
 
@@ -108,7 +139,7 @@ It has plenty of docs on how to use it, but for our specific plugins:
 
 ### Docker
 
-Check [this repo](https://github.com/bobrik/ceph-collectd-graphite) for a nice docker setup to run collectd-ceph (thanks to Ian Babrou).
+Check [this repo](https://github.com/y4ns0l0/ceph-collectd-graphite) for a nice docker setup to run collectd-ceph (thanks to Ian Babrou).
 
 ## Limitations
 
@@ -124,11 +155,17 @@ GPLv2 (check LICENSE).
 
 ## Contributors
 
-Ricardo Rocha <rocha.porto@gmail.com>
+* Ricardo Rocha <rocha.porto@gmail.com> - original author
+* [Peter Gervai (grinapo) - merge maintainer](https://github.com/grinapo)
+* [Yann Matysiak (y4ns0l0)](https://github.com/y4ns0l0)
+* [Pietari Hyvärinen (kallio)](https://github.com/kallio)
+* [gcmalloc](https://github.com/gcmalloc)
+* [cfz](https://github.com/cfz)
+* [tynorth-cisco](https://github.com/tynorth-cisco)
 
 ## Support
 
-Please log tickets and issues at the [github home](https://github.com/rochaporto/collectd-ceph/issues).
+Please log tickets and issues at the [github home](https://github.com/grinapo/collectd-ceph/issues).
 
 ## Additional Notes
 
